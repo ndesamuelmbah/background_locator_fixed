@@ -5,7 +5,8 @@ buildscript {
     ext.kotlin_version = '1.7.20'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        //jcenter()
     }
 
     dependencies {
@@ -17,12 +18,14 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        //jcenter()
+        mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+
 
 android {
     compileSdkVersion 33
@@ -37,10 +40,15 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-    // compileOptions {
-    //     sourceCompatibility JavaVersion.VERSION_1_8
-    //     targetCompatibility JavaVersion.VERSION_1_8
-    // }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+    }
 }
 
 dependencies {
