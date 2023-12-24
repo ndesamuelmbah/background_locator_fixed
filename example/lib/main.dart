@@ -184,25 +184,20 @@ class _MyAppState extends State<MyApp> {
 
   Future<bool> _checkLocationPermission() async {
     final permissionStatus = await Permission.location.request();
-    switch (permissionStatus) {
-      case PermissionStatus.provisional:
-      case PermissionStatus.denied:
-      case PermissionStatus.restricted:
-      case PermissionStatus.limited:
-        final permission = await Permission.locationAlways.request();
-        if (permission == PermissionStatus.granted) {
-          return true;
-        } else {
-          return false;
-        }
-        break;
-      case PermissionStatus.granted:
+    if ([
+      PermissionStatus.provisional,
+      PermissionStatus.denied,
+      PermissionStatus.restricted,
+      PermissionStatus.limited
+    ].contains(permissionStatus)) {
+      final permission = await Permission.locationAlways.request();
+      if (permission == PermissionStatus.granted) {
         return true;
-        break;
-      default:
+      } else {
         return false;
-        break;
+      }
     }
+    return permissionStatus == PermissionStatus.granted;
   }
 
   Future<void> _startLocator() async {
