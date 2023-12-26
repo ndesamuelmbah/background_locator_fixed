@@ -143,6 +143,8 @@ class BackgroundLocatorPlugin
 
         @JvmStatic
         private fun initializeService(context: Context, args: Map<Any, Any>) {
+            val mapString = args.entries.joinToString(", ") { "\"${it.key}\": ${it.value}" }
+            Log.d("BackgroundLocatorPlugin", "initializeService => $mapString")
             val callbackHandle: Long = args[Keys.ARG_CALLBACK_DISPATCHER] as Long
             setCallbackDispatcherHandle(context, callbackHandle)
         }

@@ -209,13 +209,13 @@ class _MyAppState extends State<MyApp> {
         disposeCallback: LocationCallbackHandler.disposeCallback,
         iosSettings: IOSSettings(
             accuracy: LocationAccuracy.NAVIGATION,
-            distanceFilter: 0,
+            distanceFilter: 5,
             stopWithTerminate: true),
         autoStop: false,
         androidSettings: AndroidSettings(
             accuracy: LocationAccuracy.NAVIGATION,
-            interval: 5,
-            distanceFilter: 0,
+            interval: 60,
+            distanceFilter: 5,
             client: LocationClient.google,
             androidNotificationSettings: AndroidNotificationSettings(
                 notificationChannelName: 'Location tracking',
